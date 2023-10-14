@@ -1,42 +1,62 @@
+let playerSelection;
+let computerSelection;
+
+let message;
+let playerScore = 0;
+let computerScore = 0;
+
+function playRound (playerSelection,computerSelection){
 const choices = ['Rock','Paper','Scissors']
 const random = Math.floor(Math.random() * choices.length);
 
 function getComputerChoice (){
     return choices [random]
 };
+playerSelection = prompt('Pick Rock, Paper, or Scissors','').toUpperCase();
+computerSelection = getComputerChoice().toUpperCase();
 
-let playerSelection = prompt('Pick Rock, Paper, or Scissors').toUpperCase();
-let computerSelection = getComputerChoice();
-
-console.log(playerSelection);
-console.log(computerSelection);
-let message;
-
-function playRound (playerSelection,computerSelection){
-if (playerSelection == computerSelection) {
-    message = 'Draw!'
+if (playerSelection === computerSelection) {
+    message = 'Draw!';
+    playerScore += 1;
+    computerScore += 1;
 }
 else if (playerSelection == 'PAPER') {
-    if (computerSelection == 'Rock'){
+    if (computerSelection == 'ROCK'){
         message = 'You Win! Paper beats Rock'
+        playerScore += 1;
     }
-    else{ message = 'You Lose! Scissors beats Paper'}
+    else{ message = 'You Lose! Scissors beats Paper';
+    computerScore += 1;}
 }
 else if (playerSelection == 'ROCK') {
-    if (computerSelection == 'Paper'){
-        message ='You Lose! Paper beats Rock'
+    if (computerSelection == 'PAPER'){
+        message ='You Lose! Paper beats Rock';
+        computerScore += 1;
     }
-    else{ message = 'You Win! Rock beats Scissors'}
+    else{ message = 'You Win! Rock beats Scissors';
+            playerScore += 1;}
 }
 else if (playerSelection == 'SCISSORS') {
-    if (computerSelection == 'Rock'){
-        message ='You Lose! Rock beats Scissors'
+    if (computerSelection == 'ROCK'){
+        message ='You Lose! Rock beats Scissors';
+        computerScore += 1;
     }
-    else{ message = 'You Win! Scissors beats Paper'}
+    else{ message = 'You Win! Scissors beats Paper';
+    playerScore += 1;}
 }
 else {message = 'Pick a valid option'}
 ;
-console.log(message)
+console.log(`Player chose: ${playerSelection}`);
+console.log(`Computer chose: ${computerSelection}`);
+console.log(message);
+console.log(`Player score: ${playerScore}`);
+console.log(`Computer score: ${computerScore}`);
+return message
 };
 
-playRound(playerSelection,computerSelection)
+function game (playRound){
+    for (let i = 1; i <= 5; i++){
+    playRound(playerSelection,computerSelection);
+}}
+
+game(playRound)
